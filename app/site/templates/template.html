@@ -1,0 +1,82 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}
+    ISP DEEPNET
+{% endblock %}
+
+{% block metas %}
+    <meta charset="utf8">
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row" id="header">
+        <div class="col-sm-12 text-center text-light">
+            <img src="{{url_for('static', filename='img/logo.png')}}">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="sc"><img src="{{ url_for('static', filename='img/sc_h.png') }}"></div>
+            <ul class="row nav nav-pills mt-2">
+                {% for l in g.langs %}
+                <li class="nav-item col-sm-6 text-center">
+                    {% if l == g.lang %}
+                        <a class="nav-link active" href="/{{ l }}/{{ g.page }}">{{ g.langs[l] }}</a>
+                    {% else %}
+                        <a class="nav-link" href="/{{ l }}/{{ g.page }}">{{ g.langs[l] }}</a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="sc mt-2"><img src="{{ url_for('static', filename='img/sc_h.png') }}"></div>
+            <ul class="nav nav-pills flex-column mt-4">
+                {% for item in g.menu %}
+                    <li class="nav-item">
+                        {% if item == 'cabinet' %}
+                            <a class="nav-link" href="http://my.ispdeep.net">{{ g.menu[item] }}</a>
+                        {% else %}
+                            {% if item == g.act_page %}
+                                <a class="nav-link active" href="/{{ g.lang }}/{{ item }}">{{ g.menu[item] }}</a>
+                            {% else %}
+                                <a class="nav-link" href="/{{ g.lang }}/{{ item }}">{{ g.menu[item] }}</a>
+                            {% endif %}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="sc mt-4"><img src="{{ url_for('static', filename='img/sc_h.png') }}"></div>
+            <div class="nav-item text-center">
+                <a class="nav-link" href="{{ url_for('site.feedback', lang=g.lang) }}">
+                    <img src="{{ url_for('static', filename='img/feedback.png') }}"><br />
+                    {% if g.lang == 'ua' %}
+                        Напишіть нам!
+                    {% elif g.lang == 'ru' %}
+                        Напишите нам!
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-9 pt-4">
+            {% block app_content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="row text-center text-light small p-1" id="footer">
+        <div class="col-sm-12">
+            {% if g.lang == 'ua' %}
+                ТОВ "ІСП ДІПНЕТ" (C) 2012-2020
+            {% elif g.lang == 'ru' %}
+                ООО "ИСП ДИПНЕТ" (С) 2012-2020
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

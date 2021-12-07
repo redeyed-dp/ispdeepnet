@@ -1,0 +1,71 @@
+{% extends "template.html" %}
+{% block app_content %}
+ 
+<h3> Вартість підключення </h3>
+<table class="table table-sm table-hover border">
+    <thead>
+        <tr><th> Технологія </th><th> Вартість </th></tr>
+    </thead>
+    <tbody>
+        {% for con in cons %}
+            <tr>
+                <td> {{ con.ua }} </td>
+                <td>
+                    {% if con.price ==0 %}
+                        Безкоштовно
+                    {% else %}
+                        {{ con.price }} грн
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p class="small">
+ * Вартість підключення може змінюватись в залежності від відстані до найбліжчого вузла а також додаткового обладнання, встановленого абоненту.
+</p>
+
+<h3> Щомісячна абонплата </h3>
+<table class="table table-sm table-hover border">
+    <thead>
+        <tr><th> Тариф </th><th> Швидкість </th><th> Щомісячна абонплата </th></tr>
+    </thead>
+    <tbody>
+        {% for tariff in tariffs %}
+            <tr>
+                <td> {{ tariff.ua }} </td>
+                <td> {{ tariff.speed }} МБіт/с </td>
+                <td>
+                    {% if tariff.price ==0 %}
+                        Безкоштовно
+                    {% else %}
+                        {{ tariff.price }} грн
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3> Додаткові послуги </h3>
+<table class="table table-sm table-hover border">
+    <thead>
+        <tr><th> Послуга </th><th> Вартість </th></tr>
+    </thead>
+    <tbody>
+        {% for extra in extras %}
+            <tr>
+                <td> {{ extra.ua }} </td>
+                <td>
+                    {% if extra.price ==0 %}
+                        Безкоштовно
+                    {% else %}
+                        {{ extra.price }} грн
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

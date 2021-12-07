@@ -1,0 +1,31 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+{% extends "admin_template.html" %}
+{% block app_content %}
+
+<div class="row-fluid">
+    <div class="col-10 offset-1 mt-4">
+        {{ wtf.quick_form(form, form_type="horizontal", horizontal_columns=('sm', 3, 9)) }}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+$(document).ready(function() {
+    var speed = $('#speed').parent().parent();
+    if ($('#service').val() != 'i') {
+        speed.addClass('d-none');
+    }
+    $('#service').on('change', function() {
+        if ($('#service').val() == 'i') {
+            speed.removeClass('d-none');
+        }
+        else {
+            speed.addClass('d-none');
+        }
+    });
+});
+</script>
+{% endblock %}

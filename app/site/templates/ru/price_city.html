@@ -1,0 +1,71 @@
+{% extends "template.html" %}
+{% block app_content %}
+ 
+<h3> Стоимость подключения </h3>
+<table class="table table-sm table-hover border">
+    <thead>
+        <tr><th> Техноголия </th><th> Стоимость </th></tr>
+    </thead>
+    <tbody>
+        {% for con in cons %}
+            <tr>
+                <td> {{ con.ru }} </td>
+                <td>
+                    {% if con.price ==0 %}
+                        Бесплатно
+                    {% else %}
+                        {{ con.price }} грн
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p class="small">
+ * Стоимость подключения может меняться в зависимости от расстояния до ближайшего узла а также дополнительного оборудования, установленного абоненту.
+</p>
+
+<h3> Ежемесячная абонплата </h3>
+<table class="table table-sm table-hover border">
+    <thead>
+        <tr><th> Тариф </th><th> Скорость </th><th> Ежемесячная абонплата </th></tr>
+    </thead>
+    <tbody>
+        {% for tariff in tariffs %}
+            <tr>
+                <td> {{ tariff.ru }} </td>
+                <td> {{ tariff.speed }} МБит/с </td>
+                <td>
+                    {% if tariff.price ==0 %}
+                        Бесплатно
+                    {% else %}
+                        {{ tariff.price }} грн
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3> Дополнительные услуги </h3>
+<table class="table table-sm table-hover border">
+    <thead>
+        <tr><th> Услуга </th><th> Стоимость </th></tr>
+    </thead>
+    <tbody>
+        {% for extra in extras %}
+            <tr>
+                <td> {{ extra.ru }} </td>
+                <td>
+                    {% if extra.price ==0 %}
+                        Бесплатно
+                    {% else %}
+                        {{ extra.price }} грн
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

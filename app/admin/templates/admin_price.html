@@ -1,0 +1,90 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+{% extends "admin_template.html" %}
+{% block app_content %}
+
+<div class="row-fluid">
+    <div class="col-10 offset-1 mt-4">
+        {{ wtf.quick_form(form, form_type="horizontal", horizontal_columns=('sm', 3, 9)) }}
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="col-12">
+
+        <h3> Тарифы для {{ city.ru }}</h3>
+
+        <table class="table table-sm">
+            <thead class="thead thead-dark">
+                <tr>
+                    <th> Название по-русски </th>
+                    <th> Назва українською </th>
+                    <th> Скорость </th>
+                    <th> Цена </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table-primary" colspan="6"> Ежемесячная абонплата </td>
+                </tr>
+            {% for i in internet %}
+                <tr>
+                    <td>{{ i.ru }}</td>
+                    <td>{{ i.ua }}</td>
+                    <td>{{ i.speed }} Мбит/с</td>
+                    <td>{{ i.price }} грн</td>
+                    <td><a href="{{ url_for('admin.price_edit', id=i.id) }}">Редактировать</a></td>
+                    <td><a href="{{ url_for('admin.price_del', id=i.id) }}">Удалить</a></td>
+                </tr>
+            {% endfor %}
+                <tr>
+                    <td class="table-primary" colspan="6"> Подключение </td>
+                </tr>
+            {% for c in connection %}
+                <tr>
+                    <td>{{ c.ru }}</td>
+                    <td>{{ c.ua }}</td>
+                    <td> </td>
+                    <td>{{ c.price }} грн</td>
+                    <td><a href="{{ url_for('admin.price_edit', id=c.id) }}">Редактировать</a></td>
+                    <td><a href="{{ url_for('admin.price_del', id=c.id) }}">Удалить</a></td>
+                </tr>
+            {% endfor %}
+                <tr>
+                    <td class="table-primary" colspan="6"> Дополнительные услуги </td>
+                </tr>
+            {% for e in extra %}
+                <tr>
+                    <td>{{ e.ru }}</td>
+                    <td>{{ e.ua }}</td>
+                    <td> </td>
+                    <td>{{ e.price }} грн</td>
+                    <td><a href="{{ url_for('admin.price_edit', id=e.id) }}">Редактировать</a></td>
+                    <td><a href="{{ url_for('admin.price_del', id=e.id) }}">Удалить</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+$(document).ready(function() {
+    $('#service').change(function() {
+        var speed = $('#speed').parent().parent();
+        if ($('#service').val() == 'i') {
+            speed.removeClass('d-none');
+        }
+        else {
+            speed.addClass('d-none');
+        }
+    });
+});
+</script>
+{% endblock %}

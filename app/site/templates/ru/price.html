@@ -1,0 +1,13 @@
+{% extends "template.html" %}
+{% block app_content %}
+
+<h3> Выберите свой населенный пункт: </h3>
+<ul>
+    {% for region in regions %}
+    <li>
+        <a href="/ru/price/{{ region.id }}">{{ region.ru }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

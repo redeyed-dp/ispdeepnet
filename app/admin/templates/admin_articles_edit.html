@@ -1,0 +1,80 @@
+{% extends "admin_template.html" %}
+{% block app_content %}
+
+<div class="row mt-4">
+    <div class="col-9">
+        <form action="" method="post" class="needs-validation">
+            {{ form.hidden_tag() }}
+            <div class="form-group row">
+                {{ form.ru_name.label(class="form-control-label col-form-label-sm col-sm-4") }}
+                <div class="col-sm-8">{{ form.ru_name(class="form-control form-control-sm") }}</div>
+            </div>
+            <div class="form-group row">
+                {{ form.ua_name.label(class="form-control-label col-form-label-sm col-sm-4") }}
+                <div class="col-sm-8">{{ form.ua_name(class="form-control form-control-sm") }}</div>
+            </div>
+
+            <hr>
+
+            <div class="form-group row">
+                {{ form.ru_text.label(class="form-control-label col-form-label-sm col-sm-12") }}
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">{{ form.ru_text(class="form-control form-control-sm") }}</div>
+            </div>
+
+            <hr>
+
+            <div class="form-group row">
+                {{ form.ua_text.label(class="form-control-label col-form-label-sm col-sm-12") }}
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">{{ form.ua_text(class="form-control form-control-sm") }}</div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12">{{ form.submit(class="btn btn-primary") }}</div>
+            </div>
+        </form>
+    </div>
+    <div class="col-3">
+        <iframe id="pictures" style="height:100%; width:100%;" src="{{ url_for('admin.pictures', id=id) }}"></iframe>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+<script>
+    $(document).ready(function() {
+        var field;
+        $('#ru_text').focus(function() {
+	        field = '#ru_text';
+        });
+        $('#ua_text').focus(function() {
+	        field = '#ua_text';
+        });
+
+        $('#pictures').contents().find('.article-img').click(function() {
+            if(field !== null) {
+                var pic = $(this).attr('src').split('/').pop();
+                var tag = '\n\n[img ' + pic + ']\n\n';
+                insertTag(field, tag, '');
+            }
+        });
+
+        function insertTag(field, openTag, closeTag) {
+            var startSelect = $(field).prop('selectionStart');
+            var endSelect = $(field).prop('selectionEnd');
+            var textLength = $(field).val().length;
+            var textBefore = $(field).val().substring(0, startSelect);
+            var textBetween = $(field).val().substring(startSelect, endSelect);
+            var textAfter = $(field).val().substring(endSelect, textLength);
+            $(field).val($.trim(textBefore + openTag + textBetween + closeTag + textAfter));
+        };
+
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "template.html" %}
+{% block app_content %}
+    <ul>
+    {% for (id, name) in articles %}
+        <li>
+            <a href="{{ url_for('site.article', lang=g.lang, id=id) }}">
+                {{ name }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

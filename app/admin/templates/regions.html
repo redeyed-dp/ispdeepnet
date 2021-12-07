@@ -1,0 +1,38 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+{% extends "admin_template.html" %}
+{% block app_content %}
+<div class="row-fluid">
+    <div class="col-10 offset-1 mt-4">
+        {{ wtf.quick_form(form, form_type="horizontal", horizontal_columns=('sm', 3, 9)) }}
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="col-12">
+        <table class="table table-sm">
+            <thead class="thead thead-dark">
+                <tr>
+                    <th> ID </th>
+                    <th> Название по-русски </th>
+                    <th> Назва українською </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for region in regions %}
+                <tr>
+                    <td>{{ region.id }}</td>
+                    <td>{{ region.ru }}</td>
+                    <td>{{ region.ua }}</td>
+                    <td><a href="{{ url_for('admin.price', region=region.id) }}">Тарифы</a></td>
+                    <td><a href="{{ url_for('admin.region_edit', id=region.id) }}">Редактировать</a></td>
+                    <td><a href="{{ url_for('admin.region_del', id=region.id) }}">Удалить</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

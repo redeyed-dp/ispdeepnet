@@ -1,0 +1,24 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}
+    админка сайта
+{% endblock %}
+
+{% block metas %}
+    <meta charset="utf8">
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row border border-top">
+        <div class="col-6 p-4">
+            <a href="{{ url_for('admin.index') }}">Панель управления</a>
+        </div>
+        <div class="col-6 p-4 text-right">
+            <a href="{{ url_for('admin.logout') }}">Выйти</a>
+        </div>
+    </div>
+    {% block app_content %}
+    {% endblock %}
+</div>
+{% endblock %}

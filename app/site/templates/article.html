@@ -1,0 +1,7 @@
+{% extends "template.html" %}
+{% block app_content %}
+    <h5>{{ head }}</h5>
+    {% autoescape false %}
+        {{ text }}
+    {% endautoescape %}
+{% endblock %}

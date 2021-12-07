@@ -1,0 +1,12 @@
+{% extends "template.html" %}
+{% block app_content %}
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <p class="lead">
+             Ваше сообщение отправлено. В ближайшее время с Вами свяжется наш оператор.
+        </p><br />
+        <img src="{{ url_for('static', filename='img/sent.jpg') }}">
+    </div>
+</div>
+
+{% endblock %}

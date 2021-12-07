@@ -1,0 +1,21 @@
+{% extends "admin_template.html" %}
+{% block app_content %}
+
+<div class="row-fluid">
+    <div class="col-12 m-4">
+        <h6>Страница "Тарифы"</h6>
+        <ul>
+            <li><a href="{{ url_for('admin.regions') }}">Населенные пункты</a></li>
+        </ul>
+        <h6>Страница "Абонентам"</h6>
+        <ul>
+            <li><a href="{{ url_for('admin.articles') }}">Статьи</a></li>
+        </ul>
+        <h6>Заявки с сайта</h6>
+        <ul>
+            <li><a href="{{ url_for('admin.feedback') }}">Заявки</a></li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

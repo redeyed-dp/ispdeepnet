@@ -1,0 +1,10 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+{% extends "template.html" %}
+{% block app_content %}
+
+<div class="row-fluid">
+    <div class="col-10 offset-1 mt-4">
+        {{ wtf.quick_form(form, form_type="horizontal", horizontal_columns=('sm', 3, 9)) }}
+    </div>
+</div>
+{% endblock %}
